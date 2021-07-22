@@ -109,10 +109,9 @@ HashSet<String> words=new HashSet<>();
                 {'h','r','n','s'},
                 {'a','b','c','d'}
         };
-        long start=System.currentTimeMillis();
+        
         d.findWords(boggle);
-        long end=System.currentTimeMillis();
-        System.out.println("Time taken:"+(end-start));
+        
         System.out.println(d.words);
         System.out.println("Points:"+d.words.size());
 
