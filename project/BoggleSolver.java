@@ -2,7 +2,8 @@ package DataStructures;
 import java.io.*;
 import java.util.*;
 public class BoggleSolver {
-HashSet<String> words=new HashSet<>();
+//Hashset to store the valid words
+HashSet<String> words=new HashSet<>(); 
     static  class TrieNode
     {
         char data;
