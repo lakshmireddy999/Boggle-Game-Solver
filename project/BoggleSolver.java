@@ -21,6 +21,7 @@ HashSet<String> words=new HashSet<>();
     {
         root=new TrieNode('\0');
     }
+//inserting words into Trie
     void insert(String word)
     {
         TrieNode curr=root;
@@ -35,6 +36,7 @@ HashSet<String> words=new HashSet<>();
         curr.isWord=true;
 
     }
+//finding words from  boggle matrix
     void findWords(char[][] boggle)
     {
         int m=boggle.length;
@@ -69,6 +71,7 @@ HashSet<String> words=new HashSet<>();
        
         visited[i][j]=false;
     }
+//searching whether word is present in Trie or not
     boolean search(String word)
     {
         TrieNode node=getNode(word);
