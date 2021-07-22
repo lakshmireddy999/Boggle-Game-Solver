@@ -42,7 +42,7 @@ HashSet<String> words=new HashSet<>();
         boolean[][] visited =new boolean[m][n];
         String str = "";
 
-        // traverse all matrix elements
+        // traversing the boggle matrix 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 findWordsUtil(boggle,visited,i,j,str,m,n);
@@ -66,7 +66,7 @@ HashSet<String> words=new HashSet<>();
         }
 
 
-        //str=""+str.charAt(str.length()-1);
+       
         visited[i][j]=false;
     }
     boolean search(String word)
