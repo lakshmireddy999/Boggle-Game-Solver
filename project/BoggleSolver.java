@@ -110,19 +110,33 @@ public class BoggleSolver {
             System.out.println(e.getMessage());
         }
     }
+    static int getIndex(String s)
+    {
+        return  (int)(s.length()*Math.random());
+    }
+    static void generateBoggle(char [][]boggle)
+    {
+        String s="abcdefghijklmnopqrstuvwxyz";
+        for (int i=0; i<4; i++)
+        {
+            for(int j=0; j<4; j++)
+            {
+                int index=getIndex(s);
+                boggle[i][j]=s.charAt(index);
+            }
+        }
+    }
     public static void main(String[] args) {
         BoggleSolver boggleSolver=new BoggleSolver();
        boggleSolver.readDictionaryAndCreateTrie(boggleSolver);
-        char[][] boggle ={
-                {'p','t','n','a'},
-                {'a','e','l','b'},
-                {'h','r','n','c'},
-                {'e','f','g','h'},
-        };
-        long start=System.currentTimeMillis();
+
+       char [][]boggle=new char[4][4];
+
+        //random boggle board generator
+        generateBoggle(boggle);
+
         boggleSolver.findWords(boggle);
-        long end=System.currentTimeMillis();
-        System.out.println("Time taken:"+(end-start));
+
         System.out.println(boggleSolver.words);
         System.out.println("Points:"+boggleSolver.words.size());
 
