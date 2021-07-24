@@ -134,7 +134,8 @@ public class BoggleSolver {
 
         //random boggle board generator
         generateBoggle(boggle);
-
+	
+	//finding valid words from the boggle
         boggleSolver.findWords(boggle);
 
         System.out.println(boggleSolver.words);
