@@ -4,7 +4,6 @@ import java.util.*;
 class TrieNode
 {
     char data;
-    //
     TrieNode []child;
     boolean isWord;
 
