@@ -158,10 +158,20 @@ public class BoggleSolver {
         //random boggle board generator
         generateBoggle(boggle);
 
+        System.out.println("Boggle Board");
+        for(int i=0; i<boggle.length; i++)
+        {
+            for(int j=0; j<boggle[i].length; j++)
+            {
+                System.out.print(boggle[i][j]+" ");
+            }
+            System.out.println();
+        }
         //finding valid words from the boggle
         boggleSolver.findWords(boggle);
 
         //printing all the valid words
+        System.out.println();
         System.out.println("Valid words");
 
         Iterator i=boggleSolver.words.iterator(); //using an iterator to traverse the hashset
