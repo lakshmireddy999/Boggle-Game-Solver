@@ -16,13 +16,14 @@ class TrieNode
         child=new TrieNode[26];
     }
 }
-public class BoggleSolver {
+public class BoggleSolverWithTrie {
     //Hashset to store valid words
-    HashSet<String> words=new HashSet<>();
+   static HashSet<String> words=new HashSet<>();
+   static HashSet<String> nvWords=new HashSet<>();
     TrieNode root;
 
     //Initializing the root of the trie with null
-    BoggleSolver()
+    BoggleSolverWithTrie()
     {
         root=new TrieNode('\0');
     }
@@ -63,15 +64,6 @@ public class BoggleSolver {
         }
     }
 
-    /**
-     * @param boggle A 2d matrix of characters
-     * @param visited A 2d matrix to take care whether a given index is visited or not
-     * @param i current index
-     * @param j current index
-     * @param str String to store words formed from boggle
-     * @param m row length of boggle matrix
-     * @param n column length of boggle matrix
-     */
     void findWordsUtil(char[][] boggle, boolean[][] visited, int i, int j, String str, int m, int n)
     {
         visited[i][j]=true;  //making current element of matrix as visited
@@ -113,7 +105,7 @@ public class BoggleSolver {
         }
         return curr;
     }
-     void readDictionaryAndCreateTrie(BoggleSolver boggleSolver)
+     void readDictionaryAndCreateTrie(BoggleSolverWithTrie boggleSolverWithTrie)
     {
         try
         {
@@ -124,7 +116,7 @@ public class BoggleSolver {
             while (sc.hasNextLine())
             {
                 String s=sc.nextLine();
-                boggleSolver.insert(s);
+                boggleSolverWithTrie.insert(s);
             }
 
         }
@@ -149,16 +141,8 @@ public class BoggleSolver {
             }
         }
     }
-    public static void main(String[] args) {
-        BoggleSolver boggleSolver=new BoggleSolver();
-       boggleSolver.readDictionaryAndCreateTrie(boggleSolver);
-
-       char [][]boggle=new char[4][4];
-
-        //random boggle board generator
-        generateBoggle(boggle);
-
-        System.out.println("Boggle Board");
+    static void print(char [][]boggle)
+    {
         for(int i=0; i<boggle.length; i++)
         {
             for(int j=0; j<boggle[i].length; j++)
@@ -167,22 +151,63 @@ public class BoggleSolver {
             }
             System.out.println();
         }
-        //finding valid words from the boggle
-        boggleSolver.findWords(boggle);
 
-        //printing all the valid words
-        System.out.println();
-        System.out.println("Valid words");
-
-        Iterator i=boggleSolver.words.iterator(); //using an iterator to traverse the hashset
-
-        while (i.hasNext())
+    }
+    static void getInputWords(char [][]boggle)
+    {
+        int points=0;
+        print(boggle);
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter valid strings from the Board");
+        String s[]=sc.nextLine().split(" ");
+        for(String str:s)
         {
-            System.out.print(i.next()+" "); //printing all valid words
+            if(words.contains(str))
+            {
+                points++;
+            }
+            else
+            {
+                nvWords.add(str);
+            }
         }
-        System.out.println();
-       // System.out.println(boggleSolver.words);
-        System.out.println("Points:"+boggleSolver.words.size());
+        if(!nvWords.isEmpty())
+        {
+            System.out.print(nvWords);
+            System.out.println(" are not valid words");
+        }
+        System.out.println("Total points you got:"+points);
+        System.out.println("\nTotal Valid Words:"+words.size());
+        System.out.println(words);
+    }
+    public static void main(String[] args) {
+        BoggleSolverWithTrie boggleSolverWithTrie =new BoggleSolverWithTrie();
+        boggleSolverWithTrie.readDictionaryAndCreateTrie(boggleSolverWithTrie);
+        char [][]boggle=new char[4][4];
+
+        //random boggle board generator
+        generateBoggle(boggle);
+
+        //To find valid words from the board
+        boggleSolverWithTrie.findWords(boggle);
+
+        //Play
+        System.out.println("Lets Play Boggle Game");
+
+        System.out.println("press 1 to play and 2 to get Solution");
+        Scanner sc=new Scanner(System.in);
+        int pressed=sc.nextInt();
+        if(pressed==1)
+        {
+            getInputWords(boggle);
+        }
+        else
+        {
+            print(boggle);
+            System.out.println("Total valid words:"+words.size());
+            //Valid words
+            System.out.println(boggleSolverWithTrie.words);
+        }
 
     }
 }
